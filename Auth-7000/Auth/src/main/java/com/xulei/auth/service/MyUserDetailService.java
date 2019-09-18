@@ -32,8 +32,7 @@ public class MyUserDetailService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String memberName) throws UsernameNotFoundException {
-
-        Member member = memberMapper.selectOne(new QueryWrapper<Member>().eq("memberName", memberName));
+        Member member =memberMapper.findByMemberName(memberName);
 
         if (member == null) {
             throw new UsernameNotFoundException(memberName);

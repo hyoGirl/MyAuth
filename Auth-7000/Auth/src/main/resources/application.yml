@@ -31,19 +31,14 @@ spring:
 
 
 
-##########################################################
-
 
 mybatis-plus:
   configuration:
     map-underscore-to-camel-case: true
   global-config:
     refresh-mapper: true
-  mapper-locations: classpath:mybatis/mapper/*.xml
+  mapper-locations: classpath:mybatis/*.xml
   typeAliasesPackage: com.xulei.auth.entity
-
-
-
 
 
 

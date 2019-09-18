@@ -83,9 +83,9 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
 //        super.configure(clients);
         clients.inMemory() // 使用in-memory存储
-                .withClient("哈哈") // client_id   android
+                .withClient("android") // client_id
                 .scopes("read")
-                .secret("1")  // client_secret   android
+                .secret("android")  // client_secret   android
                 .authorizedGrantTypes("password", "authorization_code", "refresh_token") // 该client允许的授权类型
                 .and()
                 .withClient("webapp") // client_id
@@ -108,11 +108,15 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
 //        super.configure(endpoints);
 
+        //如果啊，你设置了这个属性的话，那说明你有一个自己的 UserDetailsService 接口的实现，
+        // 或者你可以把这个东西设置到全局域上面去（例如 GlobalAuthenticationManagerConfigurer 这个配置对象），
+        // 当你设置了这个之后，那么 "refresh_token" 即刷新令牌授权类型模式的流程中就会包含一个检查，用来确保这个账号是否仍然有效，
+        // 假如说你禁用了这个账户的话。
+        //认证管理器，当你选择了资源所有者密码（password）授权类型的时候，请设置这个属性注入一个 AuthenticationManager 对象。
+
+
         endpoints.tokenStore(tokenStore())
-                //如果啊，你设置了这个属性的话，那说明你有一个自己的 UserDetailsService 接口的实现，或者你可以把这个东西设置到全局域上面去（例如 GlobalAuthenticationManagerConfigurer 这个配置对象），
-                // 当你设置了这个之后，那么 "refresh_token" 即刷新令牌授权类型模式的流程中就会包含一个检查，用来确保这个账号是否仍然有效，假如说你禁用了这个账户的话。
                 .userDetailsService(userDetailService)
-                //认证管理器，当你选择了资源所有者密码（password）授权类型的时候，请设置这个属性注入一个 AuthenticationManager 对象。
                 .authenticationManager(authenticationManager);
         endpoints.tokenServices(defaultTokenServices());
     }

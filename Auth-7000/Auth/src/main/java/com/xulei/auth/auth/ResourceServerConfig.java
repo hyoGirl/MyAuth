@@ -24,8 +24,12 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
     /**
      * 一个资源服务（可以和授权服务在同一个应用中，当然也可以分离开成为两个不同的应用程序）提供一些受token令牌保护的资源，
      * Spring OAuth提供者是通过Spring Security authentication filter 即验证过滤器来实现的保护，
+     *
      * 你可以通过 @EnableResourceServer 注解到一个 @Configuration 配置类上，
-     * 并且必须使用 ResourceServerConfigurer 这个配置对象来进行配置（可以选择继承自 ResourceServerConfigurerAdapter 然后覆写其中的方法，参数就是这个对象的实例），
+     *
+     * 并且必须使用 ResourceServerConfigurer 这个配置对象来进行配置
+     *
+     * （可以选择继承自 ResourceServerConfigurerAdapter 然后覆写其中的方法，参数就是这个对象的实例），
      */
 
     @Override

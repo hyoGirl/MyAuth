@@ -27,6 +27,7 @@ public class MemberController {
     @GetMapping("current")
     public Principal user(Principal principal)
     {
+
         return principal;
     }
 
